@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import About from "./Components/About";
 
-function App() {
+import Intro from "./Components/Intro";
+import Stat from "./Components/Stat";
+import SupportOptionModal from "./Components/SupportOptionModal";
+
+export default function App() {
+  const [SupportModal, setSupportModal] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Intro setSupportModal={setSupportModal} />
+      <Stat />
+      <About setSupportModal={setSupportModal} />
+      {SupportModal && <SupportOptionModal setSupportModal={setSupportModal} />}
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.main`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-bottom: 101px;
+  @media (max-width: 548px) {
+    padding-bottom: 52px;
+  }
+`;
